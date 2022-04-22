@@ -17,7 +17,6 @@
     tags:
       name: "{{ aws_vpc_name }}"
       environment: "{{ aws_environment_identifier }}"
-      owner: aws_ansible_iam_role 
   register: my_vpc  
 
 - name: Create VPC subnet and attach to "{{ my_vpc.vpc.id }}"
@@ -28,7 +27,6 @@
     cidr: "{{ aws_vpc_cidr }}"
     resource_tags:
         environment: "{{ aws_environment_identifier }}"
-        owner: "{{ aws_ansible_iam_role }}"
   register: my_vpc_subnet  
 
 - name: Create a security group
@@ -40,7 +38,6 @@
     vpc_id: "{{ my_vpc.vpc.id }}"
     tags:
       name: "{{ aws_security_group_name }}"
-      owner: "{{ aws_ansible_iam_role }}"
       environment: "{{ aws_environment_identifier }}"
     rules:
       - proto: all
